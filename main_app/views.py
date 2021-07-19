@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Animal
 # Create your views here.
 
@@ -10,6 +10,13 @@ from .models import Animal
 def home(request):
     return render(request, 'home.html')
 
+class AnimalDelete(DeleteView):
+    model = Animal
+    success_url = "/animals/"
+
+class AnimalUpdate(UpdateView):
+    model = Animal
+    fields = "__all__"
 
 class AnimalList(ListView):
     model = Animal
