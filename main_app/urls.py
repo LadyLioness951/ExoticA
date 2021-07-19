@@ -16,4 +16,5 @@ urlpatterns = [
     path('animals/<int:animal_id>/add_funfact/', views.add_funfact, name="add_funfact"),
 
     path('account/signup/', views.signup, name="signup"),
+    path('animals/<int:animal_id>/add_photo/', views.add_photo, name='add_photo'),
 ]
