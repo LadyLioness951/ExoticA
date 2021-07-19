@@ -6,3 +6,4 @@ class FunFactForm(ModelForm):
     class Meta:
         model = FunFact
         fields = ['fact']
+
