@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -30,6 +31,14 @@ class FunFact(models.Model):
     
     def __str__(self):
         return f"Fun Facts: {self.fact}"
+
+class Photo(models.Model):
+    url = models.CharField(max_length=1000)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for {self.animal_id} @{self.url}"
 
 # class Like(models.Model):
 #     fun_fact = models.ForeignKey(FunFact, on_delete = models.CASCADE)
