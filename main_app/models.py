@@ -17,6 +17,7 @@ class Animal(models.Model):
                             default=DIETS[0][0]
                             )
     endangered = models.BooleanField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('animal_detail', kwargs={'animal_id': self.id})
@@ -25,6 +26,7 @@ class Animal(models.Model):
 class FunFact(models.Model):
     fact = models.TextField(max_length=2000)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"Fun Facts: {self.fact}"

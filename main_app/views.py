@@ -28,7 +28,13 @@ class AnimalList(ListView):
 
 class AnimalCreate(CreateView):
     model = Animal
-    fields = "__all__"
+    fields = ['name', 'species', 'family', 'diet', 'endangered']
+    
+    def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the cat
+    # Let the CreateView do its job as usual
+        return super().form_valid(form)
 
 
 def animal_detail(request, animal_id):
@@ -58,7 +64,7 @@ def signup(request):
             user = form.save()
             # This is how we log a user in via code
             login(request, user)
-            return redirect('animal_index')
+            return redirect('animals_index')
         else:
             error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
@@ -72,6 +78,10 @@ def add_funfact(request, animal_id):
         factform = FunFactForm(request.POST)
         if factform.is_valid():
             new_fact = factform.save(commit=False)
-            new_fact.animal_id = animal_id
+            animal = Animal.objects.get(id = animal_id)
+            new_fact.animal = animal
+            new_fact.user = request.user
             new_fact.save()
     return redirect('animal_detail', animal_id=animal_id)
+
+    

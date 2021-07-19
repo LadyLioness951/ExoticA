@@ -7,7 +7,7 @@
 <p> {{ error_message }} </p>
 {% endif %}
 
-<form method="POST" action="{% url 'home' %}">
+<form method="POST" action="{% url 'signup' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" class="btn" value="signup">
