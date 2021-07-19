@@ -19,11 +19,15 @@ class Animal(models.Model):
     endangered = models.BooleanField()
 
     def get_absolute_url(self):
-        return reverse('animal_detail', kwargs={'pk': self.id})
+        return reverse('animal_detail', kwargs={'animal_id': self.id})
 
 
 class FunFact(models.Model):
     fact = models.TextField(max_length=2000)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"Fun Facts: {self.fact}"
 
 # class Like(models.Model):
 #     fun_fact = models.ForeignKey(FunFact, on_delete = models.CASCADE)

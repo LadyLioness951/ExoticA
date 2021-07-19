@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormMixin
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Animal
 from .forms import FunFactForm
 # Create your views here.
@@ -29,11 +29,6 @@ class AnimalList(ListView):
 class AnimalCreate(CreateView):
     model = Animal
     fields = "__all__"
-
-
-class AnimalDetail(FormMixin, DetailView):
-    model = Animal
-    form_class = FunFactForm
 
 
 def animal_detail(request, animal_id):
@@ -76,7 +71,7 @@ def add_funfact(request, animal_id):
     if request.method == 'POST':
         factform = FunFactForm(request.POST)
         if factform.is_valid():
-            new_fact = factform.save()
+            new_fact = factform.save(commit=False)
             new_fact.animal_id = animal_id
             new_fact.save()
     return redirect('animal_detail', animal_id=animal_id)
