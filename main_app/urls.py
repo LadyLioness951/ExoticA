@@ -10,13 +10,10 @@ urlpatterns = [
 
     path('animals/<int:animal_id>/', views.animal_detail, name='animal_detail'),
 
-    path('animals/<int:pk>/update/',
-         views.AnimalUpdate.as_view(), name='animal_update'),
-    path('animals/<int:pk>/delete/',
-         views.AnimalDelete.as_view(), name='animal_delete'),
+    path('animals/<int:pk>/update/', views.AnimalUpdate.as_view(), name='animal_update'),
+    path('animals/<int:pk>/delete/', views.AnimalDelete.as_view(), name='animal_delete'),
+
+    path('animals/<int:animal_id>/add_funfact/', views.add_funfact, name="add_funfact"),
 
     path('account/signup/', views.signup, name="signup"),
-
-    path('animals/<int:animal_id>/add_funfact/',
-         views.add_funfact, name="add_funfact")
 ]
