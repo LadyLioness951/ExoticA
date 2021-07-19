@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 DIETS = (('H', 'Herbivore'), ('C', 'Carnivore'), ('O', 'Omnivore'))
 
+
+
 class Animal(models.Model):
     # diet endanger phylum(?) manytomanyfield(2) name
     name = models.CharField(max_length=50)
