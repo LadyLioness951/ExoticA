@@ -40,6 +40,6 @@ class Photo(models.Model):
     def __str__(self):
         return f"Photo for {self.animal_id} @{self.url}"
 
-# class Like(models.Model):
-#     fun_fact = models.ForeignKey(FunFact, on_delete = models.CASCADE)
-#     user = models.ForeignKey(User, on_delete = models.CASCADE)
+class Like(models.Model):
+    fun_fact = models.ForeignKey(FunFact, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)

@@ -46,6 +46,8 @@
     {% for funfact in animal.funfact_set.all %}
     <tr>
         <td> {{ funfact.fact }} </td>
+        <a href="{% url 'like' animal.id funfact.id %}">Like</a>
+        <p>{{ funfact.like_set.count }}</p>
     </tr>
     {% endfor %}
 </div>
