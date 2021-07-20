@@ -17,18 +17,18 @@
 <header class="navbar-fixed">
     <nav>
         <div class="nav-wrapper #FFAB00 amber accent-4">
-            <ul>
-                <li><a href="{% url 'home' %}"> Exotica Gram Home </a></li>
-                <li><a href="{% url 'about' %}"> About Exotica Gram </a></li>
+            <ul class="black-text">
+                <li><a class="black-text" href="{% url 'home' %}"> Exotica Gram Home </a></li>
+                <li><a class="black-text" href="{% url 'about' %}"> About Exotica Gram </a></li>
                 {% if user.is_authenticated %}
                 <!-- other links go here. -->
-                <li><a href="{% url 'animals_create' %}"> Add An Animal </a></li>
-                <li><a href="{% url 'animals_index' %}"> View All Animals </a></li>
-                <li><a href="{% url 'logout' %}"> Log Out</a></li>
+                <li><a class="black-text" href="{% url 'animals_create' %}"> Add An Animal </a></li>
+                <li><a class="black-text" href="{% url 'animals_index' %}"> View All Animals </a></li>
+                <li><a class="black-text" href="{% url 'logout' %}"> Log Out</a></li>
 
                 {% else %}
-                <li><a href="{% url 'signup' %}"> Sign Up</a></li>
-                <li><a href="{% url 'login' %}"> Login</a></li>
+                <li><a class="black-text" href="{% url 'signup' %}"> Sign Up</a></li>
+                <li><a class="black-text" href="{% url 'login' %}"> Login</a></li>
                 {% endif %}
             </ul>
         </div>

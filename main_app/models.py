@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 DIETS = (('H', 'Herbivore'), ('C', 'Carnivore'), ('O', 'Omnivore'))
-ENDANGERED = ()
+ENDANGERED = (('L', 'Least Concern'), ('N', 'Near Threatened'), ('V', 'Vulnerable'),
+              ('E', 'Endangered'), ('C', 'Critically Endangered'), ('X', 'Extinct'))
 
 
 class Animal(models.Model):
@@ -18,11 +19,18 @@ class Animal(models.Model):
                             choices=DIETS,
                             default=DIETS[0][0]
                             )
-    endangered = models.BooleanField()
+    endangered = models.CharField("Conservation Status",
+                                  max_length=1,
+                                  choices=ENDANGERED,
+                                  default=ENDANGERED[0][0]
+                                  )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_diet(self):
         return dict(DIETS)[self.diet]
+
+    def get_endangered(self):
+        return dict(ENDANGERED)[self.endangered]
 
     def get_absolute_url(self):
         return reverse('animal_detail', kwargs={'animal_id': self.id})

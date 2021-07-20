@@ -10,9 +10,7 @@
                 <hr>
                 <p>Diet: {{ animal.get_diet }}</p>
                 <p>Family: {{ animal.family }}</p>
-                {% if animal.endangered %}
-                <p>Animal is endangered 😿</p>
-                {% endif %}
+                <p>Conservation Status: {{ animal.get_endangered }}</p>
                 <hr>
                 <p>Added by: {{ animal.user }}</p>
                 <p>Fun Facts go below?</p>
@@ -50,6 +48,7 @@
         <td> {{ funfact.fact }} </td>
         <a href="{% url 'like' animal.id funfact.id %}">Like</a>
         <p>{{ funfact.like_set.count }}</p>
+        <a href=" {% url 'funfact_delete' funfact.id %}">DELETE</a>
     </tr>
     {% endfor %}
 </div>
