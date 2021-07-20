@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Animal, Photo
+from .models import Animal, FunFact, Photo, Like
 from .forms import FunFactForm
 import boto3, os, uuid
 
@@ -84,8 +84,14 @@ def add_photo(request, animal_id):
   return redirect('animal_detail', animal_id=animal_id)
 
 class RemovePhoto(DeleteView):
-    models = Photo
-    success_url = '/animals/<int:animal_id>/'
+    model = Photo
+    success_url = '/animals/'
+
+def like(request, animal_id, funfact_id):
+    # funfact = FunFact.objects.get(id=funfact_id)
+    # funfact.like_set.create(fun_fact = funfact, user = request.user)
+    new_like, created = Like.objects.get_or_create(user=request.user, fun_fact_id=funfact_id)
+    return redirect('animal_detail', animal_id=animal_id)
 
 def signup(request):
     error_message = ''
