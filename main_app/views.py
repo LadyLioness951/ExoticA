@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView
@@ -69,6 +70,15 @@ def add_funfact(request, animal_id):
             new_fact.user = request.user
             new_fact.save()
     return redirect('animal_detail', animal_id=animal_id)
+
+# def delete_funfact(request, animal_id):
+
+
+class FunFactDelete(DeleteView):
+    model = FunFact
+
+    def get_success_url(self):
+        return reverse('animal_detail', kwargs={'animal_id': self.object.id})
 
 
 def add_photo(request, animal_id):
