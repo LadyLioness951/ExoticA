@@ -5,7 +5,9 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Animal, FunFact, Photo, Like
 from .forms import FunFactForm
-import boto3, os, uuid
+import boto3
+import os
+import uuid
 
 from main_app import models
 # Create your views here.
@@ -32,9 +34,9 @@ class AnimalList(ListView):
 class AnimalCreate(CreateView):
     model = Animal
     fields = ['name', 'species', 'family', 'diet', 'endangered']
-    
+
     def form_valid(self, form):
-    # Assign the logged in user (self.request.user)
+        # Assign the logged in user (self.request.user)
         form.instance.user = self.request.user  # form.instance is the cat
     # Let the CreateView do its job as usual
         return super().form_valid(form)
@@ -61,37 +63,44 @@ def add_funfact(request, animal_id):
         factform = FunFactForm(request.POST)
         if factform.is_valid():
             new_fact = factform.save(commit=False)
-            animal = Animal.objects.get(id = animal_id)
+            animal = Animal.objects.get(id=animal_id)
             new_fact.animal = animal
             new_fact.user = request.user
             new_fact.save()
     return redirect('animal_detail', animal_id=animal_id)
 
+
 def add_photo(request, animal_id):
-  # photo-file will be the "name" attribute on the <input>
-  photo_file = request.FILES.get('photo-file', None)
-  if photo_file:
-    s3 = boto3.client('s3')
-    # build a unique filename keeping the image's original extension
-    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-    try:
-      bucket = os.environ['S3_BUCKET']
-      s3.upload_fileobj(photo_file, bucket, key)
-      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-      Photo.objects.create(url=url, animal_id=animal_id, user=request.user)
-    except:
-      print('An error occurred uploading file to S3')
-  return redirect('animal_detail', animal_id=animal_id)
+    # photo-file will be the "name" attribute on the <input>
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # build a unique filename keeping the image's original extension
+        key = uuid.uuid4().hex[:6] + \
+            photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.create(
+                url=url, animal_id=animal_id, user=request.user)
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('animal_detail', animal_id=animal_id)
+
 
 class RemovePhoto(DeleteView):
     model = Photo
     success_url = '/animals/'
 
+
 def like(request, animal_id, funfact_id):
     # funfact = FunFact.objects.get(id=funfact_id)
     # funfact.like_set.create(fun_fact = funfact, user = request.user)
-    new_like, created = Like.objects.get_or_create(user=request.user, fun_fact_id=funfact_id)
+    # new_like, created = Like.objects.get_or_create(user=request.user, fun_fact_id=funfact_id)
+    Like.objects.get_or_create(user=request.user, fun_fact_id=funfact_id)
     return redirect('animal_detail', animal_id=animal_id)
+
 
 def signup(request):
     error_message = ''

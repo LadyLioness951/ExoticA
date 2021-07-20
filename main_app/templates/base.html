@@ -8,24 +8,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </head>
-<nav>
-    <div>
-        <ul>
-            <li><a href="{% url 'home' %}"> Exotica Gram Home </a></li>
-            <li><a href="{% url 'about' %}"> About Exotica Gram </a></li>
-            {% if user.is_authenticated %}
-            <!-- other links go here. -->
-            <li><a href="{% url 'animals_create' %}"> Add An Animal </a></li>
-            <li><a href="{% url 'animals_index' %}"> View All Animals </a></li>
-            <li><a href="{% url 'logout' %}"> Log Out</a></li>
-            {% else %}
-            <li><a href="{% url 'signup' %}"> Sign Up</a></li>
-            <li><a href="{% url 'login' %}"> Login</a></li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+<header class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper #FFAB00 amber accent-4">
+            <ul>
+                <li><a href="{% url 'home' %}"> Exotica Gram Home </a></li>
+                <li><a href="{% url 'about' %}"> About Exotica Gram </a></li>
+                {% if user.is_authenticated %}
+                <!-- other links go here. -->
+                <li><a href="{% url 'animals_create' %}"> Add An Animal </a></li>
+                <li><a href="{% url 'animals_index' %}"> View All Animals </a></li>
+                <li><a href="{% url 'logout' %}"> Log Out</a></li>
+
+                {% else %}
+                <li><a href="{% url 'signup' %}"> Sign Up</a></li>
+                <li><a href="{% url 'login' %}"> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <body>
     <main>
@@ -34,5 +41,8 @@
         {% endblock %}
     </main>
 </body>
+<footer>
+    <div class="center #FFAB00 amber accent-4">All Rights Reserved, &copy; 2021 Rescue Animals &nbsp;</div>
+</footer>
 
 </html>
