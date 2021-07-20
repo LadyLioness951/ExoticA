@@ -12,8 +12,41 @@
   <table>
     <!-- Render the inputs inside of <tr>s & <td>s -->
     <!-- form is an instance of a ModelForm class -->
-    {{ form.as_table }}
+    <div class="input-field">
+      <tr>
+        <td>
+          {{ form.name }}
+        </td>
+      </tr>
+    </div>
+    <tr>
+      <td>
+        {{ form.species }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.family }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.diet }}
+      </td>
+    </tr>
+
   </table>
+  <label>
+    <input type="checkbox" name="endangered" id="id_endangered">
+    <span>
+      endangered
+    </span>
+  </label>
   <input type="submit" value="Submit!" class="btn">
 </form>
+
+<script>
+  const selectEl = document.getElementById('id_diet');
+  M.FormSelect.init(selectEl);
+</script>
 {% endblock %}

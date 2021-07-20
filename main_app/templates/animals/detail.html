@@ -8,15 +8,15 @@
                 <span class="card-title">{{ animal.name }}</span>
                 <p>Species: {{ animal.species }}</p>
                 <hr>
-                <p>Diet: {{ animal.diet }}</p>
+                <p>Diet: {{ animal.get_diet }}</p>
                 <p>Family: {{ animal.family }}</p>
                 {% if animal.endangered %}
                 <p>Animal is endangered 😿</p>
-                    {% endif %}
-                    <hr>
+                {% endif %}
+                <hr>
                 <p>Added by: {{ animal.user }}</p>
                 <p>Fun Facts go below?</p>
-                    <br>
+                <br>
             </div>
             <div>
                 <a href=" {% url 'animal_update' animal.id %}">EDIT</a>
@@ -53,7 +53,7 @@
     </tr>
     {% endfor %}
 </div>
-<script> 
+<script>
     var instance = M.Carousel.init({
         fullWidth: true
     });
