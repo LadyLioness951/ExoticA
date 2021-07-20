@@ -25,6 +25,7 @@
         </div>
         {% for photo in animal.photo_set.all %}
         <img class="responsive-img card-panel" src="{{photo.url}}">
+        <a href=" {% url 'remove_photo' animal.id %}">DELETE</a>
         {% empty %}
         <div class="card-panel teal-text center-align">No Photos Uploaded</div>
         {% endfor %}
