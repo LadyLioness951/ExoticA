@@ -14,7 +14,8 @@ from main_app import models
 
 
 def home(request):
-    return render(request, 'home.html')
+    photos = Photo.objects.all()
+    return render(request, 'home.html', {'photos': photos})
 
 
 class AnimalDelete(DeleteView):

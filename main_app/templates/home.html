@@ -4,11 +4,9 @@
 <h1>ExoticA Home</h1>
 <div class="container">
     <div class="carousel">
-        <a class="carousel-item" href="#one!"><img src="https://i.imgur.com/SVcxgfg.png"></a>
-        <a class="carousel-item" href="#two!"><img src="https://i.imgur.com/SVcxgfg.png"></a>
-        <a class="carousel-item" href="#three!"><img src="https://i.imgur.com/SVcxgfg.png"></a>
-        <a class="carousel-item" href="#four!"><img src="https://i.imgur.com/SVcxgfg.png"></a>
-        <a class="carousel-item" href="#five!"><img src="https://i.imgur.com/SVcxgfg.png"></a>
+        {% for photo in photos|slice:"0:10" %}
+        <a class="carousel-item" href="/animals/{{ photo.animal.id }}/"><img src="{{ photo.url }}"></a>
+        {% endfor %}
     </div>
 </div>
 <script>
