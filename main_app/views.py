@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Animal, FunFact, Photo, Like
@@ -19,21 +21,21 @@ def home(request):
     return render(request, 'home.html', {'photos': photos})
 
 
-class AnimalDelete(DeleteView):
+class AnimalDelete(LoginRequiredMixin, DeleteView):
     model = Animal
     success_url = "/animals/"
 
 
-class AnimalUpdate(UpdateView):
+class AnimalUpdate(LoginRequiredMixin, UpdateView):
     model = Animal
     fields = ['name', 'species', 'family', 'diet', 'endangered']
 
 
-class AnimalList(ListView):
+class AnimalList(LoginRequiredMixin, ListView):
     model = Animal
 
 
-class AnimalCreate(CreateView):
+class AnimalCreate(LoginRequiredMixin, CreateView):
     model = Animal
     fields = ['name', 'species', 'family', 'diet', 'endangered']
 
@@ -43,7 +45,7 @@ class AnimalCreate(CreateView):
     # Let the CreateView do its job as usual
         return super().form_valid(form)
 
-
+@login_required
 def animal_detail(request, animal_id):
     animal = Animal.objects.get(id=animal_id)
     # Get the toys the cat doesn't have
@@ -60,6 +62,7 @@ def about(request):
     return render(request, 'about.html')
 
 
+@login_required
 def add_funfact(request, animal_id):
     if request.method == 'POST':
         factform = FunFactForm(request.POST)
@@ -71,16 +74,15 @@ def add_funfact(request, animal_id):
             new_fact.save()
     return redirect('animal_detail', animal_id=animal_id)
 
-# def delete_funfact(request, animal_id):
 
-
-class FunFactDelete(DeleteView):
+class FunFactDelete(LoginRequiredMixin, DeleteView):
     model = FunFact
 
     def get_success_url(self):
         return reverse('animal_detail', kwargs={'animal_id': self.object.id})
 
 
+@login_required
 def add_photo(request, animal_id):
     # photo-file will be the "name" attribute on the <input>
     photo_file = request.FILES.get('photo-file', None)
@@ -100,11 +102,11 @@ def add_photo(request, animal_id):
     return redirect('animal_detail', animal_id=animal_id)
 
 
-class RemovePhoto(DeleteView):
+class RemovePhoto(LoginRequiredMixin, DeleteView):
     model = Photo
     success_url = '/animals/'
 
-
+@login_required
 def like(request, animal_id, funfact_id):
     # funfact = FunFact.objects.get(id=funfact_id)
     # funfact.like_set.create(fun_fact = funfact, user = request.user)
