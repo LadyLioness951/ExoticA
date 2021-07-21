@@ -12,7 +12,10 @@ ExoticA's purpose is to create a one stop shop for finding and sharing images of
     - Django
     - Materialize
     - Heroku
-    - S3
+    - AWS (S3)
+    - HTML
+    - CSS
+    - JS
 
 ## GOALS
     - Implement OAuth2 for multiple services (FB, Google, etc.)
