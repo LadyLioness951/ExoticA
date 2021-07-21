@@ -13,3 +13,6 @@ body {
     text-align: right;
   }
   
+  #about {
+    padding: 0 15px;
+  }

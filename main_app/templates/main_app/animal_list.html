@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Animals</h2>
+<h2 class="center amber-text text-lighten-2">Animals</h2>
 <div class="row">
     {% for animal in animal_list %}
     <a href="{% url 'animal_detail' animal.id %}">
         <div class="col s5">
-            <div class="card">
+            <div class="card #546e7a blue-grey darken-1">
+                <div class="card-image">
+                    <img src="{{ animal.photo_set.first.url }}">
+                </div>
                 <div class="card-content">
                     <span class="card-title">{{ animal.name }}</span>
                     <p>Created By: The One, The Only, The Legendary Guillermo{{ animal.user }}</p>

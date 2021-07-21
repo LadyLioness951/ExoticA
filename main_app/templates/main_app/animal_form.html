@@ -3,11 +3,11 @@
 
 {% if object %}
 
-<h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+<h1>Edit <span class="amber-text text-lighten-2">{{ object.name }}</span></h1>
 
 {% else %}
 
-<h1>Add Animal</h1>
+<h1 class="center amber-text text-lighten-2">Add Animal</h1>
 
 {% endif %}
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
@@ -20,7 +20,7 @@
       <!-- form is an instance of a ModelForm class -->
 
       {{form.as_p}}
-      <input type="submit" value="Submit!" class="btn">
+      <input type="submit" value="Submit!" class="btn #ffd54f amber lighten-2 black-text waves-effect waves-dark">
     </form>
   </div>
 </div>
