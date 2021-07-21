@@ -16,12 +16,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <header class="navbar-fixed">
     <nav>
         <div class="nav-wrapper #ffd54f amber lighten-2">
-            <ul class="black-text">
+            <a href="#!" class="brand-logo"></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="black-text hide-on-med-and-down">
                 <li><a class="black-text" href="{% url 'home' %}"> Exotica Gram Home </a></li>
                 <li><a class="black-text" href="{% url 'about' %}"> About Exotica Gram </a></li>
                 {% if user.is_authenticated %}
@@ -38,6 +41,18 @@
         </div>
     </nav>
 </header>
+<ul class="sidenav" id="mobile-demo">
+    <li><a class="black-text" href="{% url 'about' %}"> About Exotica Gram </a></li>
+    {% if user.is_authenticated %}
+    <!-- other links go here. -->
+    <li><a class="black-text" href="{% url 'animals_create' %}"> Add An Animal </a></li>
+    <li><a class="black-text" href="{% url 'animals_index' %}"> View All Animals </a></li>
+    <li><a class="black-text" href="{% url 'logout' %}"> Log Out</a></li>
+    {% else %}
+    <li><a class="black-text" href="{% url 'signup' %}"> Sign Up</a></li>
+    <li><a class="black-text" href="{% url 'login' %}"> Login</a></li>
+    {% endif %}
+</ul>
 
 <body class="#37474f blue-grey darken-3">
     <main>
@@ -51,3 +66,14 @@
 </footer>
 
 </html>
+<script> 
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, options);
+    });
+    // Or with jQuery
+
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+</script>
