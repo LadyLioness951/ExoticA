@@ -1,3 +1,6 @@
+ h1{
+  font-family: 'Fredericka the Great', cursive;
+}
 body {
     display: flex;
     min-height: 100vh;
@@ -15,4 +18,9 @@ body {
   
   #about {
     padding: 0 15px;
+  }
+
+  #card-container {
+    display: flex;
+    justify-content: center;
   }
