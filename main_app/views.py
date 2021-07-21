@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Animal, FunFact, Photo, Like
+from .models import Animal, FunFact, Photo, Like, Video
 from .forms import FunFactForm
 import boto3
 import os
@@ -20,6 +20,8 @@ def home(request):
     photos = Photo.objects.all()
     return render(request, 'home.html', {'photos': photos})
 
+def charity(request):
+    return render(request, 'charity.html')
 
 class AnimalDelete(LoginRequiredMixin, DeleteView):
     model = Animal
@@ -101,9 +103,32 @@ def add_photo(request, animal_id):
             print('An error occurred uploading file to S3')
     return redirect('animal_detail', animal_id=animal_id)
 
+@login_required
+def add_video(request, animal_id):
+    # photo-file will be the "name" attribute on the <input>
+    video_file = request.FILES.get('video-file', None)
+    if video_file:
+        s3 = boto3.client('s3')
+        # build a unique filename keeping the image's original extension
+        key = uuid.uuid4().hex[:6] + \
+            video_file.name[video_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(video_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Video.objects.create(
+                url=url, animal_id=animal_id, user=request.user)
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('animal_detail', animal_id=animal_id)
+
 
 class RemovePhoto(LoginRequiredMixin, DeleteView):
     model = Photo
+    success_url = '/animals/'
+
+class RemoveVideo(LoginRequiredMixin, DeleteView):
+    model = Video
     success_url = '/animals/'
 
 @login_required
@@ -133,3 +158,4 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
