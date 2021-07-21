@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="amber-text text-lighten-2">Animal Details</h1>
+<h1 class="center amber-text text-lighten-2">Animal Details</h1>
 <div class="row">
     <div class="col s12">
         <div class="card #ffd54f amber lighten-2">
@@ -26,10 +26,11 @@
             <a class="carousel-item" href='#'><img src="{{photo.url}}"></a>
             <a href=" {% url 'remove_photo' animal.id %}">DELETE</a>
             {% empty %}
-            <div class="card-panel black-text center-align">No Photos Uploaded</div>
+            <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Photos Uploaded</div>
             {% endfor %}
         </div>
-        <form action="{% url 'add_photo' animal.id %}" enctype="multipart/form-data" method="POST" class="card-panel #ffd54f amber lighten-2">
+        <form action="{% url 'add_photo' animal.id %}" enctype="multipart/form-data" method="POST"
+            class="card-panel #ffd54f amber lighten-2">
             {% csrf_token %}
             <input type="file" name="photo-file">
             <br><br>
@@ -40,17 +41,19 @@
         <form method="POST" action="{% url 'add_funfact' animal.id %}">
             {% csrf_token %}
             {{ funfact_form.as_p }}
-            <input type="submit" value="Add Fun Fact" class="btn #ffd54f amber lighten-2 black-text waves-effect waves-dark">
+            <input type="submit" value="Add Fun Fact"
+                class="btn #ffd54f amber lighten-2 black-text waves-effect waves-dark">
         </form>
     </div>
     <ul>
-    {% for funfact in animal.funfact_set.all %}
+        {% for funfact in animal.funfact_set.all %}
         <li class="grey-text text-lighten-2"> {{ funfact.fact }} </li>
         <li><a href="{% url 'like' animal.id funfact.id %}">👍 &nbsp; {{ funfact.like_set.count }}</a>
             |
-        <a href=" {% url 'funfact_delete' funfact.id %}">DELETE</a></li>
+            <a href=" {% url 'funfact_delete' funfact.id %}">DELETE</a>
+        </li>
 
-    {% endfor %}
+        {% endfor %}
     </ul>
 </div>
 <script>
