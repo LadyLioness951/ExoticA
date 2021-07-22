@@ -20,7 +20,9 @@ ExoticA's purpose is to create a one stop shop for finding and sharing images of
 ## GOALS
     - Implement OAuth2 for multiple services (FB, Google, etc.)
     - More mobile friendly
-    - Add links to charities that help the chosen animal
+    - fix image cards in animal list
+    - Implement standard photo size
+    
 
 
 #### OTHER
