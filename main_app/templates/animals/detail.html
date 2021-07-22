@@ -17,14 +17,18 @@
                 <br>
             </div>
             <div>
+                {% if user == animal.user %}
                 <a href=" {% url 'animal_update' animal.id %}">EDIT</a>
                 <a href=" {% url 'animal_delete' animal.id %}">DELETE</a>
+                {% endif %}
             </div>
         </div>
         <div class="carousel carousel-slider">
             {% for photo in animal.photo_set.all %}
             <a class="carousel-item" href='#'><img src="{{photo.url}}"></a>
+            {% if user == animal.user %}
             <a href=" {% url 'remove_photo' animal.id %}">DELETE</a>
+            {% endif %}
             {% empty %}
             <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Photos Uploaded</div>
             {% endfor %}
@@ -34,7 +38,9 @@
             <a class="carousel-item" href='#'><video controls height="240" width="320">
                 <source src="{{ video.url }}">
             </video></a>
+            {% if user == animal.user %}
             <a href=" {% url 'remove_video' animal.id %}">DELETE</a>
+            {% endif %}
             {% empty %}
             <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Videos Uploaded</div>
             {% endfor %}
@@ -68,8 +74,10 @@
         {% for funfact in animal.funfact_set.all %}
         <li class="grey-text text-lighten-2"> {{ funfact.fact }} </li>
         <li><a href="{% url 'like' animal.id funfact.id %}">👍 &nbsp; {{ funfact.like_set.count }}</a>
+            {% if user == animal.user %}
             |
             <a href=" {% url 'funfact_delete' funfact.id %}">DELETE</a>
+            {% endif %}
         </li>
 
         {% endfor %}

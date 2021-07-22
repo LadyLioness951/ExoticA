@@ -36,6 +36,11 @@ class AnimalUpdate(LoginRequiredMixin, UpdateView):
 class AnimalList(LoginRequiredMixin, ListView):
     model = Animal
     
+    def get_ordering(self):
+      sort = self.request.GET.get('sort')
+      if sort:
+        return sort
+      return self.ordering
 
 class AnimalCreate(LoginRequiredMixin, CreateView):
     model = Animal
