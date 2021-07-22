@@ -6,9 +6,37 @@
 <h1 class="center amber-text text-lighten-2"> About ExoticA Gram </h1>
 <hr>
 <div id="about">
-    <p class="grey-text text-lighten-2">come check out the exotic animals!</p>
+    <p class="grey-text text-lighten-2">Come check out the exotic animals! ExoticA functions as a way to explore different exotic animals
+    and see the unique creatures that walk (or fly) this Earth. Feel free to add any exotic animals you know of to our database. You can also add 
+    pictures to existing entries. And if there any fun facts you know of, feel free to chime in in our funfact section of each animal. 
+    Try sorting by family to find animals similar to your favorite exotic animal! </p>
 
 
-    <p class="grey-text text-lighten-2">This website protected by the tardigang</p>
+    <p class="grey-text text-lighten-2">Designed and created by: Taylor Chin, William Stull II, Megan Hays</p>
+    <p class="grey-text text-lighten-2">Customer support agent 24/7 number: +1(415)-298-3002</p>
+    <p class="grey-text text-lighten-2">email: andiilii@yahoo.com</p>
+    <div class="container">
+        <div class="carousel">
+            <a class="carousel-item" href="#"><img src="https://i.imgur.com/SVcxgfg.png"></a>
+            <a class="carousel-item" href="#"><img src="https://i.imgur.com/SVcxgfg.png"></a>
+            <a class="carousel-item" href="#"><img src="https://i.imgur.com/SVcxgfg.png"></a>
+            <a class="carousel-item" href="#"><img src="https://i.imgur.com/SVcxgfg.png"></a>
+        </div>
+    </div>
+    <p class="right grey-text text-lighten-2">This website protected by the tardigang<br><img class="bottom right" width="200px" src="../static/images/tardigang.png"></img></p>
 </div>
+<script>
+    // Or with jQuery
+
+    $(document).ready(function () {
+        $('.carousel').carousel({
+            padding: 100    
+        });
+        autoplay();
+        function autoplay() {
+            $('.carousel').carousel('next');
+            setTimeout(autoplay, 500);
+        }
+    });
+</script>
 {% endblock %}
