@@ -42,6 +42,7 @@
     </nav>
 </header>
 <ul class="sidenav" id="mobile-demo">
+    <li><a class="black-text" href="{% url 'home' %}"> Exotica Gram Home </a></li>
     <li><a class="black-text" href="{% url 'about' %}"> About Exotica Gram </a></li>
     {% if user.is_authenticated %}
     <!-- other links go here. -->
