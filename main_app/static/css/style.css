@@ -37,3 +37,13 @@ footer.page-footer {
 /* form input:not([type=submit]) {
   color: #e0e0e0;
 } */
+
+#field input:not([type=submit]){
+  color: white;
+}
+
+
+.supercoolchrisclass {
+  width: auto !important;
+  height: 50vw !important;
+}

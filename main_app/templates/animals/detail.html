@@ -23,17 +23,19 @@
                 {% endif %}
             </div>
         </div>
-        <div class="carousel carousel-slider">
-            {% for photo in animal.photo_set.all %}
-            <a class="carousel-item" href='#'><img src="{{photo.url}}"></a>
-            {% if user == animal.user %}
-            <a href=" {% url 'remove_photo' animal.id %}">DELETE</a>
-            {% endif %}
-            {% empty %}
-            <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Photos Uploaded</div>
-            {% endfor %}
+        <div class="container">
+            <div class="carousel carousel-slider">
+                {% for photo in animal.photo_set.all %}
+                <a class="supercoolchrisclass carousel-item"><img class="supercoolchrisclass" src="{{photo.url}}"></a>
+                {% if user == animal.user %}
+                <a href=" {% url 'remove_photo' animal.id %}">DELETE</a>
+                {% endif %}
+                {% empty %}
+                <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Photos Uploaded</div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="carousel carousel-slider">
+        <div class="center carousel carousel-slider">
             {% for video in animal.video_set.all %}
             <a class="carousel-item" href='#'><video controls height="240" width="320">
                 <source src="{{ video.url }}">
@@ -84,12 +86,12 @@
     </ul>
 </div>
 <script>
-    var instance = M.Carousel.init({
-        fullWidth: true
-    });
+
     // Or with jQuery
     $('.carousel.carousel-slider').carousel({
-        fullWidth: true
+        numVisible: 1,
+        indicators: true,
+        dist: -1,
     });
 </script>
 {% endblock %}
