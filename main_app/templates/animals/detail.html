@@ -31,7 +31,9 @@
         </div>
         <div class="carousel carousel-slider">
             {% for video in animal.video_set.all %}
-            <a class="carousel-item" href='#'><img src="{{video.url}}"></a>
+            <a class="carousel-item" href='#'><video controls height="240" width="320">
+                <source src="{{ video.url }}">
+            </video></a>
             <a href=" {% url 'remove_video' animal.id %}">DELETE</a>
             {% empty %}
             <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Videos Uploaded</div>
