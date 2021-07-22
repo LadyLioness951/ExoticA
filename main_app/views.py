@@ -35,7 +35,7 @@ class AnimalUpdate(LoginRequiredMixin, UpdateView):
 
 class AnimalList(LoginRequiredMixin, ListView):
     model = Animal
-
+    
 
 class AnimalCreate(LoginRequiredMixin, CreateView):
     model = Animal
