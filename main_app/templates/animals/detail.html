@@ -13,7 +13,6 @@
                 <p>Conservation Status: {{ animal.get_endangered }}</p>
                 <hr>
                 <p>Added by: {{ animal.user }}</p>
-                <p>Fun Facts go below?</p>
                 <br>
             </div>
             <div>
@@ -28,7 +27,7 @@
                 {% for photo in animal.photo_set.all %}
                 <a class="supercoolchrisclass carousel-item"><img class="supercoolchrisclass" src="{{photo.url}}"></a>
                 {% if user == animal.user %}
-                <a href=" {% url 'remove_photo' animal.id %}">DELETE</a>
+                <a href=" {% url 'remove_photo' animal.id %}"></a>
                 {% endif %}
                 {% empty %}
                 <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Photos Uploaded</div>
@@ -41,7 +40,7 @@
                 <source src="{{ video.url }}">
             </video></a>
             {% if user == animal.user %}
-            <a href=" {% url 'remove_video' animal.id %}">DELETE</a>
+            <a href=" {% url 'remove_video' animal.id %}"></a>
             {% endif %}
             {% empty %}
             <div class="card-panel black-text center-align card-panel #ffd54f amber lighten-2">No Videos Uploaded</div>
