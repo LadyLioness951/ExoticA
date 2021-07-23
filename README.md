@@ -5,7 +5,10 @@ This is a Django app using Materialize styling, server hosting on heroku and ima
 ExoticA's purpose is to create a one stop shop for finding and sharing images of exotic animals. It also provides knowledge about animals current endangered status. You can visit the app by clicking [HERE](https://exoticaa88.herokuapp.com/).
 
 ## SCREENSHOTS
-<img alt="" src="" width='300px'>
+![Home](https://i.imgur.com/w1DEOXmm.png)
+![Charities](https://i.imgur.com/mmNCzEkm.png)
+![Detail](https://i.imgur.com/eoRDenxm.png)
+![List](https://i.imgur.com/fpDjjYum.png)
 
 ## TECHNOLOGIES AND FEATURES
     - Python
