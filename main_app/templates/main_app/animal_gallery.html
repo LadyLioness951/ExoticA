@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<H1>PHOTO GALLERY</H1>
+<div class="container">
+    <div class="row">
+        {% for photo in animal.photo_set.all %}
+        <div class="col s3 m3 "><img src="{{ photo.url }}" alt=""
+                class="supercoolchrisclass materialboxed responsive-img"></div>
+    </div>
+</div>
+{% endfor %}
+
+
+<script>
+    var mb = document.querySelectorAll('.materialboxed');
+    M.Materialbox.init(mb, {
+
+    })
+
+</script>
+{% endblock %}
